@@ -427,41 +427,7 @@
 </head>
 <body>
 
-<div id="passwordPrompt" style="
-    position: fixed;
-    top: 0; right: 0; bottom: 0; left: 0;
-    background-color: rgba(0,0,0,0.4); /* خلفية شبه شفافة */
-    backdrop-filter: blur(8px); /* تأثير الضبابية */
-    -webkit-backdrop-filter: blur(8px); /* لدعم متصفحات WebKit (مثل Safari) */
-    z-index: 9999;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    color: white;
-    font-family: 'Cairo', sans-serif;
-">
-    <h2>الرجاء إدخال الرمز للدخول:</h2>
-    <input type="password" id="sitePassword" placeholder="أدخل الرمز هنا" style="
-        padding: 15px;
-        font-size: 1.2em;
-        border-radius: 8px;
-        border: none;
-        margin-top: 15px;
-        text-align: center;
-    ">
-    <button onclick="checkPassword()" style="
-        margin-top: 20px;
-        padding: 10px 20px;
-        font-size: 1.1em;
-        background-color: #28a745;
-        color: white;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-    ">دخول</button>
-    <p id="errorText" style="color: #ffc107; margin-top: 15px; display: none;">❌ الرمز غير صحيح، حاول مرة أخرى</p>
-</div>
+
 
     <div class="container">
         <div class="theme-switch-wrapper">
