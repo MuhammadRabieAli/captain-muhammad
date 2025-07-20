@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>كابتن محمد وليد - دليلك الشامل للياقة والصحة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* تعريف الألوان للوضع الفاتح والداكن */
+        :root {
+            /* الوضع الفاتح (الافتراضي) */
+            --primary-color: #007bff; /* أزرق */
+            --secondary-color: #28a745; /* أخضر */
+            --accent-color: #ffc107; /* أصفر للتأكيد */
+            --background-light: #f8f9fa;
+            --background-dark: #343a40;
+            --text-light: #f8f9fa;
+            --text-dark: #343a40;
+            --card-background: #ffffff;
+            --border-color: #dee2e6;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --result-bg: #e6ffed;
+            --result-border: #c8e6c9;
+            --result-text: #1a6d2f;
+            --recommendation-bg: #f0f8ff;
+            --recommendation-border: #d0e8ff;
+            --recommendation-text: #0a58a7;
+            --section-header-bg: #e2e6ea; /* لون خلفية عناوين الأقسام */
+            --whatsapp-color: #25D366; /* لون الواتساب الأصلي */
+        }
+
+        /* الوضع الداكن */
+        body.dark-mode {
+            --primary-color: #8ab4f8; /* أزرق فاتح */
+            --secondary-color: #6ee69a; /* أخضر فاتح */
+            --accent-color: #ffd766; /* أصفر فاتح */
+            --background-light: #1a1a1a;
+            --background-dark: #2c2c2c;
+            --text-light: #e0e0e0;
+            --text-dark: #f0f0f0;
+            --card-background: #252525;
+            --border-color: #444;
+            --shadow-color: rgba(0, 0, 0, 0.4);
+            --result-bg: #2f4f39;
+            --result-border: #4a7d5b;
+            --result-text: #e0e0e0;
+            --recommendation-bg: #2a3b4c;
+            --recommendation-border: #3b5a77;
+            --recommendation-text: #c0d8f0;
+            --section-header-bg: #3c4a5c; /* لون داكن لعناوين الأقسام */
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--background-light);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            color: var(--text-dark);
+            direction: rtl; /* من اليمين لليسار للعربية */
+            text-align: right;
+            line-height: 1.8; /* زيادة لسهولة القراءة */
+            transition: background-color 0.4s ease, color 0.4s ease;
+        }
+
+        .container {
+            background-color: var(--card-background);
+            padding: 45px 35px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px var(--shadow-color);
+            width: 100%;
+            max-width: 700px; /* زيادة عرض الكونتينر لاستيعاب المحتوى */
+            box-sizing: border-box;
+            border: 1px solid var(--border-color);
+            transition: background-color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+            margin: 30px 0; /* مسافة أعلى وأسفل الكونتينر */
+        }
+
+        .logo-container {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo-container img {
+            max-width: 200px; /* حجم الشعار */
+            height: auto;
+            border-radius: 50%; /* إذا أردت جعل الشعار دائريًا */
+            border: 3px solid var(--primary-color);
+            box-shadow: 0 0 15px rgba(0, 123, 255, 0.3);
+            transition: border-color 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 3.2em; /* حجم أكبر للعنوان الرئيسي */
+            font-weight: 800; /* خط سميك جدا */
+            letter-spacing: 1px;
+            transition: color 0.4s ease;
+        }
+
+        .tagline {
+            text-align: center;
+            font-size: 1.25em;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+        }
+
+        .intro-section h2, .section-header {
+            background-color: var(--section-header-bg);
+            color: var(--primary-color);
+            padding: 15px 25px;
+            border-radius: 10px;
+            margin-top: 40px;
+            margin-bottom: 25px;
+            font-size: 2em;
+            font-weight: 700;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            transition: background-color 0.4s ease, color 0.4s ease;
+        }
+        
+        .intro-section p, .about-section p, .exercise-section p {
+            font-size: 1.15em;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+            text-align: justify; /* لترتيب النص بشكل أفضل */
+        }
+
+        .intro-section ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 25px;
+        }
+        .intro-section ul li {
+            position: relative;
+            padding-right: 30px;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+            color: var(--text-dark);
+        }
+        .intro-section ul li::before {
+            content: "✨"; /* أيقونة مميزة */
+            position: absolute;
+            right: 0;
+            font-size: 1.2em;
+            color: var(--accent-color);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: var(--text-dark);
+            font-size: 1.15em;
+            transition: color 0.4s ease;
+        }
+
+        input[type="number"],
+        select {
+            width: calc(100% - 24px);
+            padding: 14px;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            font-size: 1.05em;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.4s ease, color 0.4s ease;
+            background-color: var(--card-background);
+            color: var(--text-dark);
+        }
+
+        input[type="number"]:focus,
+        select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+            outline: none;
+        }
+
+        button {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 16px 30px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.3em;
+            font-weight: bold;
+            width: 100%;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            margin-top: 25px;
+            box-shadow: 0 4px 10px rgba(40, 167, 69, 0.2);
+        }
+
+        button:hover {
+            background-color: var(--secondary-color);
+            filter: brightness(0.9);
+            transform: translateY(-2px);
+        }
+
+        .result {
+            margin-top: 35px;
+            padding: 25px;
+            background-color: var(--result-bg);
+            border: 1px solid var(--result-border);
+            border-radius: 12px;
+            text-align: center;
+            font-size: 1.4em;
+            color: var(--result-text);
+            font-weight: bold;
+            display: none;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transition: background-color 0.4s ease, border-color 0.4s ease, color 0.4s ease;
+        }
+
+        .recommendation {
+            margin-top: 30px;
+            padding: 25px;
+            background-color: var(--recommendation-bg);
+            border: 1px solid var(--recommendation-border);
+            border-radius: 12px;
+            text-align: right;
+            font-size: 1.1em;
+            color: var(--recommendation-text);
+            display: none;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transition: background-color 0.4s ease, border-color 0.4s ease, color 0.4s ease;
+        }
+
+        .recommendation h3 {
+            color: var(--primary-color);
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 1.6em;
+            transition: color 0.4s ease;
+        }
+
+        .recommendation ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .recommendation ul li {
+            margin-bottom: 8px;
+            padding-right: 25px;
+            position: relative;
+        }
+
+        .recommendation ul li::before {
+            content: "💪"; /* أيقونة ذراع لزيادة التحديد */
+            color: var(--secondary-color);
+            font-size: 1.2em;
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+
+        .error {
+            color: #dc3545;
+            font-size: 0.95em;
+            margin-top: 8px;
+            display: none;
+            text-align: right;
+        }
+
+        /* زر التبديل بين الوضعين */
+        .theme-switch-wrapper {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 20px;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .theme-switch {
+            display: inline-block;
+            height: 34px;
+            position: relative;
+            width: 60px;
+        }
+
+        .theme-switch input {
+            display: none;
+        }
+
+        .slider {
+            background-color: #ccc;
+            bottom: 0;
+            cursor: pointer;
+            left: 0;
+            position: absolute;
+            right: 0;
+            top: 0;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            background-color: #fff;
+            bottom: 4px;
+            content: "";
+            height: 26px;
+            left: 4px;
+            position: absolute;
+            transition: .4s;
+            width: 26px;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: var(--primary-color);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        .theme-switch-wrapper span {
+            color: var(--text-dark);
+            font-size: 1em;
+            font-weight: bold;
+            transition: color 0.4s ease;
+        }
+
+        /* أقسام التمارين */
+        .exercise-section {
+            margin-top: 40px;
+            padding: 25px;
+            background-color: var(--recommendation-bg); /* استخدام نفس لون خلفية التوصيات */
+            border: 1px solid var(--recommendation-border);
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transition: background-color 0.4s ease, border-color 0.4s ease;
+            margin-bottom: 30px; /* مسافة بعد القسم */
+        }
+
+        .exercise-section h3 {
+            color: var(--primary-color);
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            text-align: center;
+            transition: color 0.4s ease;
+        }
+
+        .exercise-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .exercise-section ul li {
+            margin-bottom: 12px;
+            padding-right: 30px;
+            position: relative;
+            font-size: 1.1em;
+            color: var(--text-dark);
+        }
+
+        .exercise-section ul li::before {
+            content: "🔹"; /* نقطة ماسية للمظهر */
+            color: var(--accent-color);
+            font-size: 1.2em;
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+
+        .muscle-illustration {
+            text-align: center;
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #e9ecef; /* لون فاتح للخلفية */
+            border-radius: 10px;
+            border: 1px solid #ced4da;
+            color: #495057;
+            font-size: 0.95em;
+        }
+
+        body.dark-mode .muscle-illustration {
+            background-color: #3f4a56;
+            border-color: #5d6d7e;
+            color: #d1d9e0;
+        }
+
+        .whatsapp-contact {
+            margin-top: 40px;
+            text-align: center;
+            padding: 25px;
+            background-color: var(--secondary-color);
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+            transition: background-color 0.4s ease;
+        }
+
+        .whatsapp-contact p {
+            color: white;
+            font-size: 1.4em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .whatsapp-contact a {
+            display: inline-block;
+            background-color: var(--whatsapp-color);
+            color: white;
+            text-decoration: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 1.3em;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .whatsapp-contact a:hover {
+            background-color: #1DA851; /* لون أغمق قليلاً للواتساب */
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+
+<div id="passwordPrompt" style="
+    position: fixed;
+    top: 0; right: 0; bottom: 0; left: 0;
+    background-color: rgba(0,0,0,0.4); /* خلفية شبه شفافة */
+    backdrop-filter: blur(8px); /* تأثير الضبابية */
+    -webkit-backdrop-filter: blur(8px); /* لدعم متصفحات WebKit (مثل Safari) */
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: white;
+    font-family: 'Cairo', sans-serif;
+">
+    <h2>الرجاء إدخال الرمز للدخول:</h2>
+    <input type="password" id="sitePassword" placeholder="أدخل الرمز هنا" style="
+        padding: 15px;
+        font-size: 1.2em;
+        border-radius: 8px;
+        border: none;
+        margin-top: 15px;
+        text-align: center;
+    ">
+    <button onclick="checkPassword()" style="
+        margin-top: 20px;
+        padding: 10px 20px;
+        font-size: 1.1em;
+        background-color: #28a745;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+    ">دخول</button>
+    <p id="errorText" style="color: #ffc107; margin-top: 15px; display: none;">❌ الرمز غير صحيح، حاول مرة أخرى</p>
+</div>
+
+    <div class="container">
+        <div class="theme-switch-wrapper">
+            <span>الوضع الليلي</span>
+            <label class="theme-switch" for="checkbox">
+                <input type="checkbox" id="checkbox" />
+                <div class="slider round"></div>
+            </label>
+        </div>
+
+        <div class="logo-container">
+            </div>
+
+        <h1>كابتن محمد وليد 🚀</h1>
+        <p class="tagline">
+            "صحتك، لياقتك، مستقبلك... نبدأ الرحلة الآن!"
+        </p>
+
+        <div class="intro-section">
+            <h2 style="text-align: center;">مرحباً بك في عالم اللياقة!</h2>
+            <p>
+                في رحلتك نحو جسم أقوى وصحة أفضل، ليس هناك استثمار أهم من استثمارك في نفسك. الجيم ليس مجرد مكان لرفع الأثقال، بل هو بيئة للنمو، التحدي، واكتشاف إمكانياتك الحقيقية.
+            </p>
+            <ul>
+                <li>**ابدأ بخطوات صغيرة:** كل رحلة عظيمة تبدأ بخطوة. لا تضغط على نفسك من البداية.</li>
+                <li>**الاستمرارية هي المفتاح:** النتائج لا تأتي بين عشية وضحاها، بل بالالتزام والمثابرة.</li>
+                <li>**استمع لجسدك:** الراحة والتعافي جزء أساسي من التمرين.</li>
+                <li>**التغذية السليمة:** التمرين وحده لا يكفي، الغذاء هو وقودك.</li>
+                <li>**لا تستسلم:** ستواجه تحديات، ولكن القوة الحقيقية تكمن في النهوض بعد كل سقطة.</li>
+            </ul>
+            <p>
+                دعنا نبدأ رحلتك نحو الأفضل معًا!
+            </p>
+        </div>
+
+        <hr style="border: 0; height: 1px; background: var(--border-color); margin: 40px auto; width: 80%;">
+
+        <div class="about-section">
+            <h2 class="section-header">حاسبة السعرات الحرارية والتوصيات الغذائية 🥗</h2>
+            <p style="text-align: center; margin-bottom: 30px;">
+                ابدأ رحلتك بمعرفة ما يحتاجه جسمك. أدخل بياناتك لتحصل على تقدير لاحتياجك اليومي من السعرات الحرارية وتوصيات غذائية مخصصة لهدفك.
+            </p>
+
+            <div class="form-group">
+                <label for="gender">النوع:</label>
+                <select id="gender">
+                    <option value="male">ذكر</option>
+                    <option value="female">أنثى</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="age">العمر (سنوات):</label>
+                <input type="number" id="age" placeholder="مثال: 30" min="1" step="1">
+                <div class="error" id="ageError">الرجاء إدخال عمر صحيح (أكبر من 0).</div>
+            </div>
+
+            <div class="form-group">
+                <label for="weight">الوزن (كجم):</label>
+                <input type="number" id="weight" placeholder="مثال: 75.5" min="1" step="0.1">
+                <div class="error" id="weightError">الرجاء إدخال وزن صحيح (أكبر من 0).</div>
+            </div>
+
+            <div class="form-group">
+                <label for="height">الطول (سم):</label>
+                <input type="number" id="height" placeholder="مثال: 170" min="1" step="0.1">
+                <div class="error" id="heightError">الرجاء إدخال طول صحيح (أكبر من 0).</div>
+            </div>
+
+            <div class="form-group">
+                <label for="activity">مستوى النشاط البدني:</label>
+                <select id="activity">
+                    <option value="1.2">قليل جداً (لا توجد تمارين أو تمارين خفيفة جداً)</option>
+                    <option value="1.375">خفيف (ممارسة الرياضة 1-3 أيام/أسبوع)</option>
+                    <option value="1.55">معتدل (ممارسة الرياضة 3-5 أيام/أسبوع)</option>
+                    <option value="1.725">عالي (ممارسة الرياضة 6-7 أيام/أسبوع)</option>
+                    <option value="1.9">عالي جداً (ممارسة الرياضة يومياً وشاقة أو وظيفة تتطلب جهد بدني كبير)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="goal">الهدف:</label>
+                <select id="goal">
+                    <option value="maintain">الحفاظ على الوزن</option>
+                    <option value="lose_mild">خسارة الوزن (خفيف: 0.25 كجم/أسبوع)</option>
+                    <option value="lose_moderate">خسارة الوزن (متوسط: 0.5 كجم/أسبوع)</option>
+                    <option value="lose_extreme">خسارة الوزن (سريع: 1 كجم/أسبوع)</option>
+                    <option value="gain_mild">زيادة الوزن (خفيف: 0.25 كجم/أسبوع)</option>
+                    <option value="gain_moderate">زيادة الوزن (متوسط: 0.5 كجم/أسبوع)</option>
+                    <option value="gain_extreme">زيادة الوزن (سريع: 1 كجم/أسبوع)</option>
+                </select>
+            </div>
+
+            <button onclick="calculateCaloriesAndRecommendations()">احسب واعرض التوصيات</button>
+
+            <div class="result" id="result">
+                <span id="calorieResult"></span>
+            </div>
+
+            <div class="recommendation" id="recommendation">
+                <h3 id="recommendationHeader"></h3>
+                <p id="recommendationText"></p>
+                <h4>أمثلة على الأطعمة المقترحة:</h4>
+                <ul id="foodList">
+                    </ul>
+                <p style="font-size: 0.9em; color: #6c757d;">
+                    * هذه التوصيات هي تقديرية ومبدئية. للحصول على خطة غذائية مخصصة وصحية، يرجى استشارة أخصائي تغذية.
+                </p>
+            </div>
+        </div>
+
+        <hr style="border: 0; height: 1px; background: var(--border-color); margin: 40px auto; width: 80%;">
+
+        <div class="exercise-section">
+            <h2 class="section-header">تمارين Pro Split (للمبتدئين) 🌟</h2>
+            <p style="text-align: center; margin-bottom: 25px; font-size: 1.1em;">
+                نظام Pro Split للمبتدئين يركز على تدريب مجموعة عضلية واحدة أو اثنتين في اليوم، مما يسمح بالتركيز وتحسين تقنية الأداء وتقليل خطر الإصابة.
+            </p>
+
+            <h3>اليوم الأول: الصدر والترايسبس</h3>
+            <ul>
+                <li>تمرين الضغط بالدمبلز على البنش المستوي (Dumbbell Bench Press)</li>
+                <li>تمرين الضغط بالبار على البنش المائل (Incline Barbell Press)</li>
+                <li>تفتيح الصدر بالدمبلز على البنش المستوي (Dumbbell Flyes)</li>
+                <li>تمرين الترايسبس بالكابل لأسفل (Cable Pushdowns)</li>
+                <li>تمرين الترايسبس بالدمبلز خلف الرأس بذراع واحدة (Single Arm Overhead Dumbbell Extension)</li>
+            </ul>
+            <div class="muscle-illustration">
+                عضلات الصدر والترايسبس
+            </div>
+
+            <h3>اليوم الثاني: الظهر والبايسبس</h3>
+            <ul>
+                <li>تمرين السحب العلوي بالقبضة الواسعة (Lat Pulldown - Wide Grip)</li>
+                <li>تمرين التجديف بالدمبلز بذراع واحدة (One-Arm Dumbbell Row)</li>
+                <li>تمرين التجديف بالكابل جالس (Seated Cable Row)</li>
+                <li>تمرين البايسبس بالبار (Barbell Curls)</li>
+                <li>تمرين البايسبس بالدمبلز بالتناوب (Alternating Dumbbell Curls)</li>
+            </ul>
+            <div class="muscle-illustration">
+                عضلات الظهر والبايسبس
+            </div>
+
+            <h3>اليوم الثالث: الأرجل والأكتاف</h3>
+            <ul>
+                <li>تمرين السكوات بالدمبلز (Dumbbell Squats)</li>
+                <li>تمرين ضغط الأرجل (Leg Press)</li>
+                <li>تمرين مد الأرجل (Leg Extensions)</li>
+                <li>تمرين ثني الأرجل (Hamstring Curls)</li>
+                <li>تمرين الضغط بالدمبلز فوق الرأس (Dumbbell Overhead Press)</li>
+                <li>تمرين الرفرفة الجانبية بالدمبلز (Dumbbell Lateral Raises)</li>
+            </ul>
+            <div class="muscle-illustration">
+                عضلات الأرجل والأكتاف
+            </div>
+            <p style="font-size: 0.9em; color: #6c757d; text-align: center;">
+                * يمكن أخذ يوم راحة بين كل يوم تمرين.
+            </p>
+        </div>
+
+        <hr style="border: 0; height: 1px; background: var(--border-color); margin: 40px auto; width: 80%;">
+
+        <div class="exercise-section">
+            <h2 class="section-header">تمارين Push, Pull, Legs (PPL) (للمتوسطين) 🏋️‍♀️</h2>
+            <p style="text-align: center; margin-bottom: 25px; font-size: 1.1em;">
+                نظام PPL هو أحد أكثر أنظمة التدريب فعالية للمستوى المتوسط، حيث يقسم الجسم إلى ثلاث مجموعات عضلية رئيسية، مما يسمح بتدريب كل عضلة مرتين في الأسبوع مع راحة كافية.
+            </p>
+
+            <h3>يوم Push (الصدر، الكتف الأمامي والجانبي، الترايسبس):</h3>
+            <ul>
+                <li>تمرين الضغط بالبار على البنش المستوي (Barbell Bench Press) - 3-4 مجموعات × 6-10 تكرارات</li>
+                <li>تمرين الضغط بالدمبلز على البنش المائل (Incline Dumbbell Press) - 3-4 مجموعات × 8-12 تكرار</li>
+                <li>تفتيح الصدر بالكابل (Cable Flyes) - 3 مجموعات × 10-15 تكرار</li>
+                <li>تمرين الضغط بالبار فوق الرأس (Overhead Barbell Press) - 3-4 مجموعات × 6-10 تكرارات</li>
+                <li>تمرين الرفرفة الجانبية بالدمبلز (Dumbbell Lateral Raises) - 3 مجموعات × 12-15 تكرار</li>
+                <li>تمرين الضغط الفرنسي بالبار (Skullcrushers) - 3 مجموعات × 8-12 تكرار</li>
+                <li>تمرين الترايسبس بالكابل لأسفل (Cable Pushdowns) - 3 مجموعات × 10-15 تكرار</li>
+            </ul>
+            <div class="muscle-illustration">
+                عضلات الدفع (الصدر، الكتف الأمامي والجانبي، الترايسبس)
+            </div>
+
+            <h3>يوم Pull (الظهر، البايسبس، الكتف الخلفي، الترابيس):</h3>
+            <ul>
+                <li>تمرين السحب الأمامي الواسع (Lat Pulldown - Wide Grip) - 3-4 مجموعات × 8-12 تكرار</li>
+                <li>تمرين التجديف بالبار (Barbell Rows) - 3-4 مجموعات × 6-10 تكرارات</li>
+                <li>تمرين التجديف بالدمبلز (Dumbbell Rows) - 3 مجموعات × 8-12 تكرار لكل ذراع</li>
+                <li>تمرين الرفعة المميتة (Deadlifts) - 1-2 مجموعة إحماء، ثم 1-2 مجموعة عمل × 3-6 تكرارات (للمتقدمين)</li>
+                <li>تمرين الرفرفة الخلفية بالدمبلز (Reverse Pec Deck Flyes / Dumbbell Rear Delt Flyes) - 3 مجموعات × 12-15 تكرار</li>
+                <li>تمرين البايسبس بالبار (Barbell Curls) - 3 مجموعات × 8-12 تكرار</li>
+                <li>تمرين البايسبس بالدمبلز بالتناوب (Alternating Dumbbell Curls) - 3 مجموعات × 10-15 تكرار لكل ذراع</li>
+            </ul>
+            <div class="muscle-illustration">
+                عضلات السحب (الظهر، البايسبس، الكتف الخلفي، الترابيس)
+            </div>
+
+            <h3>يوم Legs (الأرجل، البطن):</h3>
+            <ul>
+                <li>تمرين السكوات بالبار (Barbell Squats) - 3-4 مجموعات × 6-10 تكرارات</li>
+                <li>تمرين الاندفاع بالدمبلز (Dumbbell Lunges) - 3 مجموعات × 10-12 تكرار لكل رجل</li>
+                <li>تمرين ضغط الأرجل (Leg Press) - 3 مجموعات × 8-12 تكرار</li>
+                <li>تمرين مد الأرجل (Leg Extensions) - 3 مجموعات × 12-15 تكرار</li>
+                <li>تمرين ثني الأرجل (Hamstring Curls) - 3 مجموعات × 12-15 تكرار</li>
+                <li>تمرين رفع ربلة الساق (Calf Raises) - 4 مجموعات × 15-20 تكرار</li>
+                <li>تمارين البطن المتنوعة (مثل Crunches, Leg Raises) - 3-4 مجموعات حتى الفشل</li>
+            </ul>
+            <div class="muscle-illustration">
+                عضلات الأرجل والبطن
+            </div>
+            <p style="font-size: 0.9em; color: #6c757d; text-align: center;">
+                * يمكن تكرار الدورة 2-3 مرات في الأسبوع حسب القدرة والاستشفاء.
+            </p>
+        </div>
+
+        <hr style="border: 0; height: 1px; background: var(--border-color); margin: 40px auto; width: 80%;">
+
+        
+<div class="exercise-section">
+    <h2 class="section-header">تمارين Arnold Split (للمتقدمين) 💥</h2>
+    <p style="text-align: center; margin-bottom: 25px; font-size: 1.1em;">
+        يعتبر نظام Arnold Split من أقوى الأنظمة التدريبية للمتقدمين، حيث يعتمد على تدريب العضلات مرتين أسبوعيًا مع تقسيم واضح يسمح بالتركيز الشديد على كل مجموعة عضلية.
+    </p>
+
+    <h3>اليوم الأول: الصدر والظهر</h3>
+    <ul>
+        <li>تمرين البنش بالبار (Barbell Bench Press) - 4 مجموعات × 8 تكرارات</li>
+        <li>تمرين التفتيح بالدمبلز (Dumbbell Flyes) - 3 مجموعات × 12 تكرار</li>
+        <li>تمرين العقلة (Pull-Ups) - 4 مجموعات حتى الفشل</li>
+        <li>تمرين التجديف بالبار (Barbell Rows) - 4 مجموعات × 8-10 تكرارات</li>
+    </ul>
+    <div class="muscle-illustration">عضلات الصدر والظهر</div>
+
+    <h3>اليوم الثاني: الأرجل والبطن</h3>
+    <ul>
+        <li>السكوات (Barbell Squats) - 4 مجموعات × 8 تكرارات</li>
+        <li>تمرين الرفعة الرومانية (Romanian Deadlifts) - 3 مجموعات × 10 تكرارات</li>
+        <li>تمرين ضغط الأرجل (Leg Press) - 4 مجموعات × 12 تكرار</li>
+        <li>تمارين البطن: رفع الأرجل وتمارين المعدة - 3 مجموعات × 15-20 تكرار</li>
+    </ul>
+    <div class="muscle-illustration">عضلات الأرجل والبطن</div>
+
+    <h3>اليوم الثالث: الأكتاف والذراع</h3>
+    <ul>
+        <li>الضغط العسكري بالبار (Military Press) - 4 مجموعات × 8 تكرارات</li>
+        <li>الرفرفة الجانبية والخلفية (Lateral & Rear Delt Raises) - 3 مجموعات × 12-15 تكرار</li>
+        <li>تمرين البايسبس بالبار (Barbell Curls) - 3 مجموعات × 10 تكرار</li>
+        <li>الضغط الفرنسي للترايسبس (Skullcrushers) - 3 مجموعات × 10 تكرار</li>
+    </ul>
+    <div class="muscle-illustration">عضلات الأكتاف والذراع</div>
+
+    <p style="font-size: 0.9em; color: #6c757d; text-align: center;">
+        * يُفضل أخذ يوم راحة بعد كل 3 أيام قبل تكرار الدورة.
+    </p>
+</div>
+
+
+<div class="whatsapp-contact">
+            <p>
+                جاهز لتبدأ رحلتك نحو اللياقة البدنية الأفضل؟
+                <br>
+                تواصل معي الآن عبر الواتساب للحصول على خطة تدريب وتغذية مخصصة!
+            </p>
+            <a href="https://wa.me/201120880601" target="_blank">
+                تواصل واتساب مع كابتن محمد وليد
+            </a>
+        </div>
+    </div>
+
+    <script>
+        function calculateCaloriesAndRecommendations() {
+            const gender = document.getElementById('gender').value;
+            const age = parseFloat(document.getElementById('age').value);
+            const weight = parseFloat(document.getElementById('weight').value);
+            const height = parseFloat(document.getElementById('height').value);
+            const activityFactor = parseFloat(document.getElementById('activity').value);
+            const goal = document.getElementById('goal').value;
+
+            let isValid = true;
+
+            // إخفاء رسائل الأخطاء السابقة والنتائج
+            document.getElementById('ageError').style.display = 'none';
+            document.getElementById('weightError').style.display = 'none';
+            document.getElementById('heightError').style.display = 'none';
+            document.getElementById('result').style.display = 'none';
+            document.getElementById('recommendation').style.display = 'none';
+
+            // التحقق من صحة المدخلات
+            if (isNaN(age) || age <= 0) {
+                document.getElementById('ageError').style.display = 'block';
+                isValid = false;
+            }
+            if (isNaN(weight) || weight <= 0) {
+                document.getElementById('weightError').style.display = 'block';
+                isValid = false;
+            }
+            if (isNaN(height) || height <= 0) {
+                document.getElementById('heightError').style.display = 'block';
+                isValid = false;
+            }
+
+            if (!isValid) {
+                return; // إيقاف الدالة إذا كانت هناك أخطاء
+            }
+
+            let bmr; // Basal Metabolic Rate (معدل الأيض الأساسي)
+
+            // حساب BMR باستخدام معادلة Mifflin-St Jeor
+            if (gender === 'male') {
+                bmr = (10 * weight) + (6.25 * height) - (5 * age) + 5;
+            } else {
+                bmr = (10 * weight) + (6.25 * height) - (5 * age) - 161;
+            }
+
+            const tdee = bmr * activityFactor; // Total Daily Energy Expenditure (إجمالي استهلاك الطاقة اليومي)
+
+            let targetCalories = tdee;
+            let goalDescription = "";
+            let foodRecommendations = [];
+
+            // تحديد السعرات الحرارية المستهدفة والتوصيات بناءً على الهدف
+            const caloriesPerKg = 7700; // تقريباً 7700 سعرة حرارية لكل 1 كجم من الدهون
+            const weeklyChange = {
+                'lose_mild': 0.25, 'lose_moderate': 0.5, 'lose_extreme': 1,
+                'gain_mild': 0.25, 'gain_moderate': 0.5, 'gain_extreme': 1
+            };
+            const dailyCalorieAdjustment = (weeklyChange[goal] * caloriesPerKg) / 7;
+
+            switch (goal) {
+                case 'maintain':
+                    targetCalories = tdee;
+                    goalDescription = "للحفاظ على وزنك الحالي، يجب أن تستهلك نفس كمية السعرات الحرارية التي يحرقها جسمك.";
+                    foodRecommendations = [
+                        "وجبات متوازنة من البروتين، الكربوهيدرات المعقدة، والدهون الصحية.",
+                        "الخضروات والفواكه المتنوعة.",
+                        "شرب كميات كافية من الماء.",
+                        "التحكم في أحجام الوجبات."
+                    ];
+                    break;
+                case 'lose_mild':
+                    targetCalories = tdee - dailyCalorieAdjustment;
+                    goalDescription = `لخسارة الوزن بمعدل ${weeklyChange[goal]} كجم في الأسبوع، يجب أن تستهلك سعرات حرارية أقل من احتياجك اليومي.`;
+                    foodRecommendations = [
+                        "الألياف: الخضروات الورقية، الفواكه، البقوليات.",
+                        "البروتينات الخالية من الدهون: الدجاج، السمك، البيض، البقوليات.",
+                        "الكربوهيدرات المعقدة: الأرز البني، الشوفان، البطاطا الحلوة (بكميات معتدلة).",
+                        "الدهون الصحية: الأفوكادو، المكسرات (بكميات قليلة)، زيت الزيتون.",
+                        "تجنب السكريات المضافة، المشروبات الغازية، والأطعمة المصنعة."
+                    ];
+                    break;
+                case 'lose_moderate':
+                    targetCalories = tdee - dailyCalorieAdjustment;
+                    goalDescription = `لخسارة الوزن بمعدل ${weeklyChange[goal]} كجم في الأسبوع، يجب أن تستهلك سعرات حرارية أقل من احتياجك اليومي.`;
+                    foodRecommendations = [
+                        "نفس توصيات خسارة الوزن الخفيف مع التركيز أكثر على تقليل السعرات.",
+                        "زيادة استهلاك الماء.",
+                        "تقسيم الوجبات إلى وجبات صغيرة ومتعددة.",
+                        "الابتعاد عن الوجبات السريعة والمقليات."
+                    ];
+                    break;
+                case 'lose_extreme':
+                    targetCalories = tdee - dailyCalorieAdjustment;
+                    goalDescription = `لخسارة الوزن بمعدل ${weeklyChange[goal]} كجم في الأسبوع، ستحتاج إلى عجز كبير في السعرات الحرارية. هذا قد يكون صعباً ويتطلب إشرافاً متخصصاً.`;
+                    foodRecommendations = [
+                        "بروتين عالي: صدور دجاج، سمك، بياض بيض، بروتين مصل اللبن.",
+                        "خضروات غير نشوية: سبانخ، بروكلي، خيار.",
+                        "كميات قليلة جداً من الكربوهيدرات والدهون الصحية.",
+                        "شرب كميات كبيرة جداً من الماء.",
+                        "***ملاحظة هامة: هذا المعدل السريع لخسارة الوزن قد لا يكون مناسباً للجميع وقد يتطلب استشارة طبية/تغذوية قبل البدء به.***"
+                    ];
+                    break;
+                case 'gain_mild':
+                    targetCalories = tdee + dailyCalorieAdjustment;
+                    goalDescription = `لزيادة الوزن بمعدل ${weeklyChange[goal]} كجم في الأسبوع، يجب أن تستهلك سعرات حرارية إضافية عن احتياجك اليومي.`;
+                    foodRecommendations = [
+                        "زيادة حصص الطعام في الوجبات الرئيسية.",
+                        "وجبات خفيفة عالية السعرات بين الوجبات: مكسرات، فواكه مجففة، زبدة الفول السوداني.",
+                        "البروتين: لحوم حمراء، دجاج، سمك، ألبان كاملة الدسم.",
+                        "الكربوهيدرات: أرز، بطاطا، خبز القمح الكامل.",
+                        "الدهون الصحية: الأفوكادو، المكسرات (بكميات قليلة)، زيت الزيتون.",
+                        "التركيز على تدريبات القوة لبناء العضلات بدلاً من الدهون."
+                    ];
+                    break;
+                case 'gain_moderate':
+                    targetCalories = tdee + dailyCalorieAdjustment;
+                    goalDescription = `لزيادة الوزن بمعدل ${weekly[goal]} كجم في الأسبوع، يجب أن تستهلك سعرات حرارية إضافية عن احتياجك اليومي.`;
+                    foodRecommendations = [
+                        "التركيز على الأطعمة كثيفة السعرات الغذائية.",
+                        "المخفوقات (Smoothies) مع البروتين والفواكه وزبدة المكسرات.",
+                        "وجبات متعددة وصغيرة على مدار اليوم.",
+                        "منتجات الألبان كاملة الدسم.",
+                        "التركيز على تدريبات القوة لبناء العضلات بدلاً من الدهون."
+                    ];
+                    break;
+                case 'gain_extreme':
+                    targetCalories = tdee + dailyCalorieAdjustment;
+                    goalDescription = `لزيادة الوزن بمعدل ${weeklyChange[goal]} كجم في الأسبوع، ستحتاج إلى زيادة كبيرة في السعرات الحرارية. هذا قد يتطلب إشرافاً متخصصاً.`;
+                    foodRecommendations = [
+                        "كميات كبيرة من البروتين والكربوهيدرات والدهون الصحية.",
+                        "وجبات كبيرة جداً ووجبات خفيفة متكررة.",
+                        "***ملاحظة هامة: هذا المعدل السريع لزيادة الوزن قد لا يكون مناسباً للجميع وقد يتطلب استشارة طبية/تغذوية قبل البدء به لضمان زيادة كتلة عضلية صحية وليس دهوناً زائدة.***"
+                    ];
+                    break;
+            }
+
+            // عرض النتيجة
+            document.getElementById('calorieResult').textContent = `جسمك يحتاج تقريباً ${Math.round(tdee)} سعرة حرارية يومياً للحفاظ على وزنك.`;
+            document.getElementById('result').style.display = 'block';
+
+            // عرض التوصيات
+            const recommendationHeader = document.getElementById('recommendationHeader');
+            const recommendationText = document.getElementById('recommendationText');
+            const foodList = document.getElementById('foodList');
+
+            recommendationHeader.textContent = `توصيات غذائية لهدف: ${document.getElementById('goal').options[document.getElementById('goal').selectedIndex].text}`;
+            recommendationText.textContent = `${goalDescription} السعرات الحرارية المستهدفة: ${Math.round(targetCalories)} سعرة حرارية يومياً.`;
+
+            foodList.innerHTML = ''; // تفريغ القائمة قبل إضافة عناصر جديدة
+            foodRecommendations.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = item;
+                foodList.appendChild(li);
+            });
+
+            document.getElementById('recommendation').style.display = 'block';
+        }
+
+        // كود تفعيل الوضع الداكن (محتفظ به من التعديل السابق)
+        const toggleSwitch = document.getElementById('checkbox');
+        const currentTheme = localStorage.getItem('theme');
+
+        if (currentTheme) {
+            document.body.classList.add(currentTheme);
+            if (currentTheme === 'dark-mode') {
+                toggleSwitch.checked = true;
+            }
+        }
+
+        function switchTheme(e) {
+            if (e.target.checked) {
+                document.body.classList.add('dark-mode');
+                localStorage.setItem('theme', 'dark-mode');
+            } else {
+                document.body.classList.remove('dark-mode');
+                localStorage.setItem('theme', 'light-mode');
+            }
+        }
+
+        toggleSwitch.addEventListener('change', switchTheme, false);
+    
+function checkPassword() {
+    const input = document.getElementById("sitePassword").value;
+    if (input === "2412") {
+        document.getElementById("passwordPrompt").style.display = "none";
+    } else {
+        document.getElementById("errorText").style.display = "block";
+    }
+}
+
+</script>
+</body>
+</html>
